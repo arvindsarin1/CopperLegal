@@ -10,74 +10,164 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ===== 2025 Light Mode Design System ===== */
+
+    :root {
+      /* Background Hierarchy */
+      --bg-base: #FFFFFF;
+      --bg-subtle: #F8FAFC;
+      --bg-muted: #F1F5F9;
+      --bg-elevated: #FFFFFF;
+      --bg-overlay: rgba(0, 0, 0, 0.5);
+
+      /* Foreground / Text (High Contrast) */
+      --text-primary: #0F172A;
+      --text-secondary: #334155;
+      --text-muted: #64748B;
+      --text-placeholder: #94A3B8;
+
+      /* Brand & Accent Colors */
+      --brand-primary: #10B981;
+      --ai-primary: #8B5CF6;
+      --status-active: #10B981;
+      --status-warning: #F59E0B;
+      --status-urgent: #EF4444;
+      --status-neutral: #64748B;
+
+      /* Border & Divider */
+      --border-default: #E2E8F0;
+      --border-subtle: #F1F5F9;
+      --border-focus: #10B981;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      --shadow-emerald: 0 4px 14px -3px rgba(16, 185, 129, 0.25);
+      --shadow-violet: 0 4px 14px -3px rgba(139, 92, 246, 0.25);
+    }
+
     * {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
       margin: 0;
       padding: 0;
-      background: transparent;
+      background: var(--bg-base);
+      color: var(--text-primary);
       overscroll-behavior: none;
     }
 
     .mono {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
     }
 
+    /* Card Styles - Light Mode */
     .card {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px solid rgba(71, 85, 105, 0.3);
-      backdrop-filter: blur(12px);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
     }
 
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #CBD5E1;
+    }
+
+    .card-elevated {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Button Styles */
     .btn-primary {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, #10B981, #14B8A6);
+      box-shadow: var(--shadow-emerald);
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px -4px rgba(16, 185, 129, 0.35);
     }
 
     .btn-secondary {
-      background: rgba(51, 65, 85, 0.5);
-      border: 1px solid rgba(71, 85, 105, 0.5);
+      background: var(--bg-muted);
+      border: 1px solid var(--border-default);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
     }
 
+    .btn-secondary:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: var(--bg-muted);
+      color: var(--text-primary);
+    }
+
+    /* AI Badge - Light Mode */
     .ai-badge {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(16, 185, 129, 0.2));
-      border: 1px solid rgba(139, 92, 246, 0.3);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(99, 102, 241, 0.08));
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      position: relative;
     }
 
+    .ai-card {
+      background: linear-gradient(135deg, #F5F3FF, #FFFFFF, #EEF2FF);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+
+    /* Input Fields - Light Mode */
     .input-field {
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid rgba(71, 85, 105, 0.5);
-      border-radius: 8px;
-      padding: 12px;
-      color: white;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: var(--text-primary);
       width: 100%;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
       font-size: 16px;
+    }
+
+    .input-field::placeholder {
+      color: var(--text-placeholder);
     }
 
     .input-field:focus {
       outline: none;
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
     }
 
+    /* Confidence Bar */
     .confidence-bar {
-      height: 4px;
-      background: rgba(71, 85, 105, 0.3);
-      border-radius: 2px;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
       overflow: hidden;
     }
 
     .confidence-fill {
       height: 100%;
-      background: linear-gradient(90deg, #10b981, #34d399);
-      border-radius: 2px;
+      background: linear-gradient(90deg, #8B5CF6, #10B981);
+      border-radius: 4px;
     }
 
+    /* Modal Animations */
     .modal-overlay {
       animation: fadeIn 0.2s ease-out;
     }
@@ -111,26 +201,90 @@
       to { transform: translateX(0); }
     }
 
+    /* Pulse Animation for Status Indicators */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .animate-pulse-dot {
+      animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Bottom Navigation */
     .bottom-nav {
       padding-bottom: env(safe-area-inset-bottom);
     }
 
+    /* Select Dropdown */
     select {
       -webkit-appearance: none;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
       background-size: 16px;
       padding-right: 40px;
     }
 
+    /* Touch Interaction */
     .touch-action {
       touch-action: manipulation;
     }
 
     .active-scale:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
+    }
+
+    /* Status Badges */
+    .badge-active {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .badge-warning {
+      background: rgba(245, 158, 11, 0.1);
+      color: #D97706;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .badge-urgent {
+      background: rgba(239, 68, 68, 0.1);
+      color: #DC2626;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .badge-neutral {
+      background: var(--bg-muted);
+      color: var(--text-muted);
+      border: 1px solid var(--border-default);
+    }
+
+    /* Clio Sync Badge */
+    .sync-badge {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: #2563EB;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
     }
   </style>
 </head>

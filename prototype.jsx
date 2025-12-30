@@ -1,22 +1,22 @@
 const { useState, useEffect } = React;
 
-// Modal Component
+// Modal Component - Light Mode
 const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 modal-overlay" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" />
       <div className="flex items-end md:items-center justify-center min-h-full p-0 md:p-4">
         <div
-          className="modal-content relative bg-slate-900 border border-slate-700 rounded-t-2xl md:rounded-2xl w-full md:max-w-lg max-h-[85vh] overflow-auto"
+          className="modal-content relative bg-white border border-slate-200 rounded-t-2xl md:rounded-2xl w-full md:max-w-lg max-h-[85vh] overflow-auto shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="sticky top-0 bg-slate-900 border-b border-slate-700/50 p-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-white">{title}</h3>
+          <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 p-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white active-scale touch-action"
+              className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-700 hover:bg-slate-200 active-scale touch-action transition-colors"
             >
               ✕
             </button>
@@ -28,23 +28,23 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   );
 };
 
-// Bottom Sheet Component for Mobile
+// Bottom Sheet Component for Mobile - Light Mode
 const BottomSheet = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 modal-overlay md:hidden" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" />
       <div className="absolute bottom-0 left-0 right-0 modal-content">
         <div
-          className="bg-slate-900 border-t border-slate-700 rounded-t-2xl max-h-[80vh] overflow-auto"
+          className="bg-white border-t border-slate-200 rounded-t-2xl max-h-[80vh] overflow-auto shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex justify-center pt-3 pb-2">
-            <div className="w-10 h-1 bg-slate-600 rounded-full" />
+            <div className="w-10 h-1 bg-slate-300 rounded-full" />
           </div>
           <div className="px-4 pb-2">
-            <h3 className="text-lg font-semibold text-white">{title}</h3>
+            <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
           </div>
           <div className="p-4 pt-2 pb-8">{children}</div>
         </div>
@@ -59,13 +59,20 @@ const Toast = ({ message, isVisible }) => {
 
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 modal-content">
-      <div className="bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-2">
+      <div className="bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center gap-2">
         <span className="text-lg">✓</span>
         <span className="font-medium">{message}</span>
       </div>
     </div>
   );
 };
+
+// AI Sparkle Icon Component
+const AISparkle = () => (
+  <svg className="w-4 h-4 text-violet-500" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+  </svg>
+);
 
 // Main Prototype Component
 const CopperLegalPrototype = () => {
@@ -204,17 +211,17 @@ const CopperLegalPrototype = () => {
     { id: 'calendar', label: 'Calendar', icon: '📅' },
   ];
 
-  // Matters List Screen
+  // Matters List Screen - Light Mode
   const MattersListScreen = () => (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-white">Matters</h1>
-          <p className="text-sm text-slate-400">{matters.length} active matters</p>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Matters</h1>
+          <p className="text-sm text-slate-500">{matters.length} active matters</p>
         </div>
         <button
           onClick={() => setShowNewMatter(true)}
-          className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white active-scale touch-action"
         >
           + New
         </button>
@@ -225,26 +232,27 @@ const CopperLegalPrototype = () => {
           <div
             key={matter.id}
             onClick={() => setSelectedMatter(matter)}
-            className="card rounded-xl p-4 cursor-pointer hover:border-slate-600 active-scale touch-action transition-all"
+            className="bg-white border border-slate-200 rounded-2xl p-4 cursor-pointer hover:shadow-md hover:border-slate-300 active-scale touch-action transition-all"
           >
             <div className="flex items-start gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl flex-shrink-0">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl flex-shrink-0 shadow-lg shadow-blue-500/20">
                 📁
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-semibold text-white truncate">{matter.name}</h3>
-                  <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/15 text-emerald-400 flex-shrink-0">
+                  <h3 className="font-semibold text-slate-900 truncate">{matter.name}</h3>
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 flex-shrink-0">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     {matter.status}
                   </span>
                 </div>
-                <p className="text-sm text-slate-400 truncate">{matter.client} • {matter.type}</p>
+                <p className="text-sm text-slate-600 truncate">{matter.client} • {matter.type}</p>
                 <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
-                  <span className="mono">{matter.hours} hrs</span>
+                  <span className="mono font-medium text-slate-700">{matter.hours} hrs</span>
                   <span>{matter.lastActivity}</span>
                 </div>
               </div>
-              <span className="text-slate-600 text-lg">›</span>
+              <span className="text-slate-400 text-lg">›</span>
             </div>
           </div>
         ))}
@@ -252,20 +260,20 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Matter Detail Screen
+  // Matter Detail Screen - Light Mode
   const MatterDetailScreen = ({ matter }) => (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={() => setSelectedMatter(null)}
-          className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 active-scale touch-action"
+          className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 active-scale touch-action transition-colors"
         >
           ←
         </button>
         <div className="flex-1">
-          <h1 className="text-lg md:text-xl font-bold text-white">{matter.name}</h1>
-          <p className="text-sm text-slate-400">{matter.type} • #{matter.number}</p>
+          <h1 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight">{matter.name}</h1>
+          <p className="text-sm text-slate-500">{matter.type} • #{matter.number}</p>
         </div>
       </div>
 
@@ -273,17 +281,17 @@ const CopperLegalPrototype = () => {
       <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
         <button
           onClick={() => setShowTimeEntry(true)}
-          className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white flex items-center gap-2 flex-shrink-0 active-scale touch-action"
+          className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 flex-shrink-0 active-scale touch-action"
         >
           ⏱️ Log Time
         </button>
         <button
           onClick={() => setShowDocuments(true)}
-          className="btn-secondary px-4 py-2 rounded-xl text-sm font-medium text-white flex items-center gap-2 flex-shrink-0 active-scale touch-action"
+          className="btn-secondary px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 flex items-center gap-2 flex-shrink-0 active-scale touch-action"
         >
           📄 Documents
         </button>
-        <button className="btn-secondary px-4 py-2 rounded-xl text-sm font-medium text-white flex items-center gap-2 flex-shrink-0 active-scale touch-action">
+        <button className="btn-secondary px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 flex items-center gap-2 flex-shrink-0 active-scale touch-action">
           📧 Email
         </button>
       </div>
@@ -296,53 +304,62 @@ const CopperLegalPrototype = () => {
           { label: 'Value', value: matter.value, sub: 'at $300/hr' },
           { label: 'Last Activity', value: matter.lastActivity.replace(' ago', ''), sub: 'ago' },
         ].map((metric, i) => (
-          <div key={i} className="bg-slate-800/50 rounded-xl p-3 md:p-4">
-            <div className="text-xs text-slate-500 mb-1">{metric.label}</div>
-            <div className="text-lg md:text-xl font-bold text-white mono">{metric.value}</div>
+          <div key={i} className="bg-slate-50 border border-slate-100 rounded-xl p-3 md:p-4">
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">{metric.label}</div>
+            <div className="text-lg md:text-xl font-bold text-slate-900 mono">{metric.value}</div>
             <div className="text-xs text-slate-500">{metric.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Clio Sync Badge */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 flex items-center gap-2">
-        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-        <span className="text-sm font-medium text-blue-300">Synced with Clio</span>
-        <span className="text-xs text-slate-400 ml-auto">3 min ago</span>
+      <div className="sync-badge rounded-xl p-3 flex items-center gap-2">
+        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+        <span className="text-sm font-medium">Synced with Clio</span>
+        <span className="text-xs text-slate-500 ml-auto">3 min ago</span>
       </div>
 
       {/* Matter Details */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-4">Matter Details</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-4">Matter Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Client</div>
-            <div className="text-white">{matter.client}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Client</div>
+            <div className="text-slate-800 font-medium">{matter.client}</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Responsible Attorney</div>
-            <div className="text-white">{matter.attorney}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Responsible Attorney</div>
+            <div className="text-slate-800 font-medium">{matter.attorney}</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Date Opened</div>
-            <div className="text-white">{matter.dateOpened}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Date Opened</div>
+            <div className="text-slate-800 font-medium">{matter.dateOpened}</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Statute of Limitations</div>
-            <div className={matter.sol !== 'N/A' ? 'text-amber-400' : 'text-white'}>{matter.sol}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Statute of Limitations</div>
+            <div className={matter.sol !== 'N/A' ? 'text-amber-600 font-semibold' : 'text-slate-800 font-medium'}>{matter.sol}</div>
           </div>
           <div className="md:col-span-2">
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Description</div>
-            <div className="text-slate-300">{matter.description}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Description</div>
+            <div className="text-slate-600">{matter.description}</div>
           </div>
         </div>
       </div>
 
       {/* AI Suggested Tasks */}
-      <div className="ai-badge rounded-xl p-4">
+      <div className="relative bg-gradient-to-br from-violet-50 via-white to-indigo-50 border border-violet-200 rounded-2xl p-5 shadow-sm">
+        {/* AI Badge */}
+        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-100 border border-violet-200">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+            <span className="relative rounded-full h-2 w-2 bg-violet-500"></span>
+          </span>
+          <span className="text-xs font-semibold text-violet-700">AI</span>
+        </div>
+
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-lg">🧠</span>
-          <h3 className="font-semibold text-white">AI Suggested Tasks</h3>
+          <AISparkle />
+          <h3 className="font-semibold text-slate-900">AI Suggested Tasks</h3>
         </div>
         <div className="space-y-3">
           {[
@@ -350,28 +367,32 @@ const CopperLegalPrototype = () => {
             'Schedule client deposition prep',
             'Review demand letter with client',
           ].map((task, i) => (
-            <label key={i} className="flex items-center gap-3 cursor-pointer touch-action">
-              <input type="checkbox" className="w-5 h-5 rounded border-slate-600" />
-              <span className="text-sm text-slate-300">{task}</span>
+            <label key={i} className="flex items-center gap-3 cursor-pointer touch-action group">
+              <input type="checkbox" className="w-5 h-5 rounded-lg border-slate-300 text-emerald-500 focus:ring-emerald-500/20" />
+              <span className="text-sm text-slate-700 group-hover:text-slate-900 transition-colors">{task}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Recent Activity */}
-      <div className="card rounded-xl p-4">
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-white">Recent Activity</h3>
-          <button className="text-sm text-emerald-400">View all →</button>
+          <h3 className="font-semibold text-slate-900">Recent Activity</h3>
+          <button className="text-sm font-medium text-emerald-600 hover:text-emerald-700 transition-colors">View all →</button>
         </div>
         <div className="space-y-4">
           {recentActivities.map((item, i) => (
             <div key={i} className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-700 flex items-center justify-center text-xs font-medium flex-shrink-0">
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+                item.user === 'AI'
+                  ? 'bg-violet-100 text-violet-700'
+                  : 'bg-slate-100 text-slate-700'
+              }`}>
                 {item.user}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm text-white">{item.event}</div>
+                <div className="text-sm text-slate-800">{item.event}</div>
                 <div className="text-xs text-slate-500">{item.time}</div>
               </div>
             </div>
@@ -380,20 +401,20 @@ const CopperLegalPrototype = () => {
       </div>
 
       {/* Related Contacts */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-3">Related Contacts</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-3">Related Contacts</h3>
         <div className="space-y-3">
           {[
             { name: 'Sarah Johnson', role: 'Client', initials: 'SJ', color: 'from-emerald-500 to-teal-600' },
             { name: 'Robert Smith', role: 'Defendant', initials: 'RS', color: 'from-red-500 to-rose-600' },
             { name: 'James Wilson', role: 'Opposing Counsel', initials: 'JW', color: 'from-slate-500 to-slate-600' },
           ].map((contact, i) => (
-            <div key={i} className="flex items-center gap-3 cursor-pointer touch-action">
-              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${contact.color} flex items-center justify-center text-xs font-bold`}>
+            <div key={i} className="flex items-center gap-3 p-2 -mx-2 rounded-xl hover:bg-slate-50 cursor-pointer touch-action transition-colors">
+              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${contact.color} flex items-center justify-center text-xs font-bold text-white shadow-md`}>
                 {contact.initials}
               </div>
               <div>
-                <div className="text-sm text-white">{contact.name}</div>
+                <div className="text-sm font-medium text-slate-900">{contact.name}</div>
                 <div className="text-xs text-slate-500">{contact.role}</div>
               </div>
             </div>
@@ -403,15 +424,15 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Clients List Screen
+  // Clients List Screen - Light Mode
   const ClientsListScreen = () => (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-white">Clients</h1>
-          <p className="text-sm text-slate-400">{clients.length} clients</p>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Clients</h1>
+          <p className="text-sm text-slate-500">{clients.length} clients</p>
         </div>
-        <button className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white active-scale touch-action">
+        <button className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white active-scale touch-action">
           + New
         </button>
       </div>
@@ -421,21 +442,21 @@ const CopperLegalPrototype = () => {
           <div
             key={client.id}
             onClick={() => setSelectedClient(client)}
-            className="card rounded-xl p-4 cursor-pointer hover:border-slate-600 active-scale touch-action transition-all"
+            className="bg-white border border-slate-200 rounded-2xl p-4 cursor-pointer hover:shadow-md hover:border-slate-300 active-scale touch-action transition-all"
           >
             <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${client.color} flex items-center justify-center text-base font-bold flex-shrink-0`}>
+              <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${client.color} flex items-center justify-center text-base font-bold text-white flex-shrink-0 shadow-lg`}>
                 {client.initials}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-white truncate">{client.name}</h3>
-                <p className="text-sm text-slate-400 truncate">{client.email}</p>
+                <h3 className="font-semibold text-slate-900 truncate">{client.name}</h3>
+                <p className="text-sm text-slate-500 truncate">{client.email}</p>
                 <div className="flex items-center gap-4 mt-1 text-xs text-slate-500">
                   <span>{client.activeMatters} matter{client.activeMatters > 1 ? 's' : ''}</span>
-                  <span className="mono">{client.totalBilled} billed</span>
+                  <span className="mono font-medium text-slate-700">{client.totalBilled} billed</span>
                 </div>
               </div>
-              <span className="text-slate-600 text-lg">›</span>
+              <span className="text-slate-400 text-lg">›</span>
             </div>
           </div>
         ))}
@@ -443,32 +464,32 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Client Detail Screen
+  // Client Detail Screen - Light Mode
   const ClientDetailScreen = ({ client }) => (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-3 mb-4">
         <button
           onClick={() => setSelectedClient(null)}
-          className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 active-scale touch-action"
+          className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 active-scale touch-action transition-colors"
         >
           ←
         </button>
-        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${client.color} flex items-center justify-center text-base font-bold flex-shrink-0`}>
+        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${client.color} flex items-center justify-center text-base font-bold text-white flex-shrink-0 shadow-lg`}>
           {client.initials}
         </div>
         <div className="flex-1">
-          <h1 className="text-lg md:text-xl font-bold text-white">{client.name}</h1>
-          <p className="text-sm text-slate-400">{client.email}</p>
+          <h1 className="text-lg md:text-xl font-bold text-slate-900 tracking-tight">{client.name}</h1>
+          <p className="text-sm text-slate-500">{client.email}</p>
         </div>
       </div>
 
       {/* Action Buttons */}
       <div className="flex gap-2">
-        <button className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white flex items-center gap-2 flex-1 justify-center active-scale touch-action">
+        <button className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center gap-2 flex-1 justify-center active-scale touch-action">
           📞 Call
         </button>
-        <button className="btn-secondary px-4 py-2 rounded-xl text-sm font-medium text-white flex items-center gap-2 flex-1 justify-center active-scale touch-action">
+        <button className="btn-secondary px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 flex items-center gap-2 flex-1 justify-center active-scale touch-action">
           📧 Email
         </button>
       </div>
@@ -480,42 +501,42 @@ const CopperLegalPrototype = () => {
           { label: 'Total Billed', value: client.totalBilled, icon: '💰' },
           { label: 'Outstanding', value: client.outstanding, icon: '⏳' },
         ].map((stat, i) => (
-          <div key={i} className="bg-slate-800/50 rounded-xl p-3 text-center">
+          <div key={i} className="bg-slate-50 border border-slate-100 rounded-xl p-3 text-center">
             <div className="text-xl mb-1">{stat.icon}</div>
-            <div className="text-lg font-bold text-white mono">{stat.value}</div>
+            <div className="text-lg font-bold text-slate-900 mono">{stat.value}</div>
             <div className="text-xs text-slate-500">{stat.label}</div>
           </div>
         ))}
       </div>
 
       {/* Clio Sync */}
-      <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-3 flex items-center gap-2">
-        <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-        <span className="text-sm font-medium text-blue-300">Synced with Clio</span>
+      <div className="sync-badge rounded-xl p-3 flex items-center gap-2">
+        <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+        <span className="text-sm font-medium">Synced with Clio</span>
       </div>
 
       {/* Contact Details */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-3">Contact Details</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-3">Contact Details</h3>
         <div className="space-y-3 text-sm">
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Phone</div>
-            <div className="text-white">{client.phone}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Phone</div>
+            <div className="text-slate-800 font-medium">{client.phone}</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Address</div>
-            <div className="text-slate-300 whitespace-pre-line">{client.address}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Address</div>
+            <div className="text-slate-600 whitespace-pre-line">{client.address}</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Client Since</div>
-            <div className="text-white">{client.since}</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Client Since</div>
+            <div className="text-slate-800 font-medium">{client.since}</div>
           </div>
         </div>
       </div>
 
       {/* Client Matters */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-3">Matters</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-3">Matters</h3>
         <div className="space-y-3">
           {matters.filter(m => m.client === client.name).map((matter, i) => (
             <div
@@ -525,18 +546,20 @@ const CopperLegalPrototype = () => {
                 setSelectedMatter(matter);
                 setCurrentScreen('matters');
               }}
-              className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg cursor-pointer active-scale touch-action"
+              className="flex items-center justify-between p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 active-scale touch-action transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-slate-700 flex items-center justify-center">📁</div>
+                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">📁</div>
                 <div>
-                  <div className="font-medium text-white">{matter.name}</div>
+                  <div className="font-medium text-slate-900">{matter.name}</div>
                   <div className="text-sm text-slate-500">{matter.type}</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className={`text-xs px-2 py-1 rounded-full ${
-                  matter.status === 'Active' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-slate-600/50 text-slate-400'
+                <span className={`text-xs px-2.5 py-1 rounded-full font-semibold ${
+                  matter.status === 'Active'
+                    ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+                    : 'bg-slate-100 text-slate-600'
                 }`}>
                   {matter.status}
                 </span>
@@ -547,17 +570,17 @@ const CopperLegalPrototype = () => {
       </div>
 
       {/* Recent Communications */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-3">Recent Communications</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-3">Recent Communications</h3>
         <div className="space-y-3">
           {[
             { type: '📧', desc: 'Case update email', time: '2 hrs ago' },
             { type: '📞', desc: 'Phone call (18 min)', time: 'Yesterday' },
             { type: '📧', desc: 'Document request', time: 'Dec 26' },
           ].map((comm, i) => (
-            <div key={i} className="flex items-center gap-3 text-sm">
+            <div key={i} className="flex items-center gap-3 text-sm p-2 -mx-2 rounded-xl hover:bg-slate-50 transition-colors">
               <span className="text-lg">{comm.type}</span>
-              <span className="flex-1 text-slate-300">{comm.desc}</span>
+              <span className="flex-1 text-slate-700">{comm.desc}</span>
               <span className="text-xs text-slate-500">{comm.time}</span>
             </div>
           ))}
@@ -566,41 +589,53 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Time Entry Screen
+  // Time Entry Screen - Light Mode
   const TimeEntryScreen = () => (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-white">Time Entries</h1>
-          <p className="text-sm text-slate-400">Today: 4.5 hrs logged</p>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Time Entries</h1>
+          <p className="text-sm text-slate-500">Today: 4.5 hrs logged</p>
         </div>
         <button
           onClick={() => setShowTimeEntry(true)}
-          className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white active-scale touch-action"
         >
           + Log Time
         </button>
       </div>
 
       {/* AI Detection Banner */}
-      <div className="ai-badge rounded-xl p-4">
+      <div className="relative bg-gradient-to-br from-violet-50 via-white to-indigo-50 border border-violet-200 rounded-2xl p-5 shadow-sm">
+        {/* AI Badge */}
+        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-violet-100 border border-violet-200">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+            <span className="relative rounded-full h-2 w-2 bg-violet-500"></span>
+          </span>
+          <span className="text-xs font-semibold text-violet-700">AI</span>
+        </div>
+
         <div className="flex items-start gap-3">
-          <span className="text-xl">🧠</span>
+          <AISparkle />
           <div className="flex-1">
-            <div className="text-sm font-medium text-white mb-1">AI Detected Activity</div>
-            <p className="text-sm text-slate-300 mb-3">
+            <div className="text-sm font-semibold text-slate-900 mb-1">AI Detected Activity</div>
+            <p className="text-sm text-slate-600 mb-3">
               Email correspondence with opposing counsel regarding discovery requests
             </p>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-xs text-slate-500 mb-1">Confidence: 94%</div>
-                <div className="confidence-bar w-24">
-                  <div className="confidence-fill" style={{ width: '94%' }}></div>
+                <div className="text-xs text-slate-500 mb-1.5">Confidence</div>
+                <div className="flex items-center gap-3">
+                  <div className="confidence-bar w-24">
+                    <div className="confidence-fill" style={{ width: '94%' }}></div>
+                  </div>
+                  <span className="text-sm font-mono font-semibold text-emerald-600">94%</span>
                 </div>
               </div>
               <button
                 onClick={() => setShowTimeEntry(true)}
-                className="text-sm text-emerald-400 hover:text-emerald-300 active-scale touch-action"
+                className="text-sm font-medium text-emerald-600 hover:text-emerald-700 active-scale touch-action transition-colors"
               >
                 Log this →
               </button>
@@ -610,8 +645,8 @@ const CopperLegalPrototype = () => {
       </div>
 
       {/* Today's Entries */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-4">Today</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-4">Today</h3>
         <div className="space-y-3">
           {[
             { matter: 'Johnson v. Smith', desc: 'Email correspondence re: settlement', duration: '0:24', billable: true },
@@ -619,14 +654,14 @@ const CopperLegalPrototype = () => {
             { matter: 'TechCorp Acquisition', desc: 'Conference call with all parties', duration: '2:00', billable: true },
             { matter: 'Admin', desc: 'Internal team meeting', duration: '0:30', billable: false },
           ].map((entry, i) => (
-            <div key={i} className="flex items-start gap-3 p-3 bg-slate-800/50 rounded-lg">
+            <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
               <div className="flex-1">
-                <div className="font-medium text-white text-sm">{entry.matter}</div>
-                <div className="text-sm text-slate-400">{entry.desc}</div>
+                <div className="font-medium text-slate-900 text-sm">{entry.matter}</div>
+                <div className="text-sm text-slate-500">{entry.desc}</div>
               </div>
               <div className="text-right flex-shrink-0">
-                <div className="text-sm font-medium text-white mono">{entry.duration}</div>
-                <div className={`text-xs ${entry.billable ? 'text-emerald-400' : 'text-slate-500'}`}>
+                <div className="text-sm font-semibold text-slate-900 mono">{entry.duration}</div>
+                <div className={`text-xs font-medium ${entry.billable ? 'text-emerald-600' : 'text-slate-500'}`}>
                   {entry.billable ? 'Billable' : 'Non-billable'}
                 </div>
               </div>
@@ -636,37 +671,37 @@ const CopperLegalPrototype = () => {
       </div>
 
       {/* Weekly Summary */}
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-4">This Week</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-4">This Week</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Total Hours</div>
-            <div className="text-2xl font-bold text-white mono">24.5</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Total Hours</div>
+            <div className="text-2xl font-bold text-slate-900 mono">24.5</div>
           </div>
           <div>
-            <div className="text-xs text-slate-500 uppercase tracking-wide mb-1">Billable</div>
-            <div className="text-2xl font-bold text-emerald-400 mono">22.0</div>
+            <div className="text-xs text-slate-500 uppercase tracking-wider font-medium mb-1">Billable</div>
+            <div className="text-2xl font-bold text-emerald-600 mono">22.0</div>
           </div>
         </div>
       </div>
     </div>
   );
 
-  // Calendar Screen (Placeholder)
+  // Calendar Screen - Light Mode
   const CalendarScreen = () => (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl md:text-2xl font-bold text-white">Calendar</h1>
-          <p className="text-sm text-slate-400">December 2024</p>
+          <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Calendar</h1>
+          <p className="text-sm text-slate-500">December 2024</p>
         </div>
-        <button className="btn-primary px-4 py-2 rounded-xl text-sm font-medium text-white active-scale touch-action">
+        <button className="btn-primary px-4 py-2.5 rounded-xl text-sm font-semibold text-white active-scale touch-action">
           + Event
         </button>
       </div>
 
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-4">Today's Schedule</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-4">Today's Schedule</h3>
         <div className="space-y-3">
           {[
             { time: '9:00 AM', title: 'Client Call - Johnson', type: 'call' },
@@ -674,33 +709,36 @@ const CopperLegalPrototype = () => {
             { time: '2:00 PM', title: 'Deposition Prep - TechCorp', type: 'meeting' },
             { time: '4:00 PM', title: 'Team Standup', type: 'meeting' },
           ].map((event, i) => (
-            <div key={i} className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg">
-              <div className="text-sm text-slate-400 mono w-16">{event.time}</div>
+            <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+              <div className="text-sm text-slate-500 mono w-16 font-medium">{event.time}</div>
               <div className="flex-1">
-                <div className="font-medium text-white text-sm">{event.title}</div>
+                <div className="font-medium text-slate-900 text-sm">{event.title}</div>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="card rounded-xl p-4">
-        <h3 className="font-semibold text-white mb-4">Upcoming Deadlines</h3>
+      <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+        <h3 className="font-semibold text-slate-900 mb-4">Upcoming Deadlines</h3>
         <div className="space-y-3">
           {[
             { date: 'Dec 31', title: 'Discovery Response Due - Johnson v. Smith', urgent: true },
             { date: 'Jan 5', title: 'Filing Deadline - Anderson Estate', urgent: false },
             { date: 'Jan 10', title: 'Closing Date - TechCorp Acquisition', urgent: false },
           ].map((deadline, i) => (
-            <div key={i} className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-lg">
-              <div className={`text-sm mono w-16 ${deadline.urgent ? 'text-red-400' : 'text-slate-400'}`}>
+            <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+              <div className={`text-sm mono w-16 font-medium ${deadline.urgent ? 'text-red-600' : 'text-slate-500'}`}>
                 {deadline.date}
               </div>
               <div className="flex-1">
-                <div className="font-medium text-white text-sm">{deadline.title}</div>
+                <div className="font-medium text-slate-900 text-sm">{deadline.title}</div>
               </div>
               {deadline.urgent && (
-                <span className="text-xs px-2 py-1 rounded-full bg-red-500/15 text-red-400">Urgent</span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 ring-1 ring-red-200 animate-pulse">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                  Urgent
+                </span>
               )}
             </div>
           ))}
@@ -709,27 +747,29 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Time Entry Modal Content
+  // Time Entry Modal Content - Light Mode
   const TimeEntryModalContent = () => (
     <div className="space-y-5">
       {/* AI Detection Banner */}
-      <div className="ai-badge rounded-xl p-4">
+      <div className="relative bg-gradient-to-br from-violet-50 via-white to-indigo-50 border border-violet-200 rounded-xl p-4">
         <div className="flex items-start gap-3">
-          <span className="text-xl">🧠</span>
+          <AISparkle />
           <div className="flex-1">
-            <div className="text-sm font-medium text-white mb-1">AI Detected Activity</div>
-            <p className="text-sm text-slate-300 mb-3">
+            <div className="text-sm font-semibold text-slate-900 mb-1">AI Detected Activity</div>
+            <p className="text-sm text-slate-600 mb-3">
               Email correspondence with opposing counsel regarding discovery requests
             </p>
             <div className="flex items-center gap-4">
               <div>
                 <div className="text-xs text-slate-500 mb-1">Confidence</div>
-                <div className="confidence-bar w-20">
-                  <div className="confidence-fill" style={{ width: '94%' }}></div>
+                <div className="flex items-center gap-2">
+                  <div className="confidence-bar w-20">
+                    <div className="confidence-fill" style={{ width: '94%' }}></div>
+                  </div>
+                  <span className="text-xs font-mono font-semibold text-emerald-600">94%</span>
                 </div>
-                <div className="text-xs text-emerald-400 mt-1">94%</div>
               </div>
-              <button className="text-xs text-emerald-400 hover:text-emerald-300">Apply suggestion →</button>
+              <button className="text-xs font-medium text-emerald-600 hover:text-emerald-700 transition-colors">Apply suggestion →</button>
             </div>
           </div>
         </div>
@@ -737,7 +777,7 @@ const CopperLegalPrototype = () => {
 
       {/* Matter Selection */}
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Matter</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Matter</label>
         <select className="input-field">
           <option>Johnson v. Smith - Personal Injury</option>
           <option>Anderson Estate - Estate Planning</option>
@@ -748,23 +788,23 @@ const CopperLegalPrototype = () => {
       {/* Duration */}
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Duration</label>
+          <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Duration</label>
           <div className="flex items-center gap-2">
             <input type="text" className="input-field text-center" defaultValue="0" style={{ width: '60px' }} />
-            <span className="text-slate-500">:</span>
+            <span className="text-slate-400">:</span>
             <input type="text" className="input-field text-center" defaultValue="24" style={{ width: '60px' }} />
             <span className="text-xs text-slate-500 ml-1">h : m</span>
           </div>
         </div>
         <div>
-          <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Date</label>
+          <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Date</label>
           <input type="text" className="input-field" defaultValue="Dec 29, 2024" />
         </div>
       </div>
 
       {/* Activity Type */}
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Activity Type</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Activity Type</label>
         <div className="grid grid-cols-4 gap-2">
           {[
             { id: 'email', icon: '📧', label: 'Email' },
@@ -775,14 +815,14 @@ const CopperLegalPrototype = () => {
             <button
               key={type.id}
               onClick={() => setActivityType(type.id)}
-              className={`p-3 rounded-lg text-center transition-all active-scale touch-action ${
+              className={`p-3 rounded-xl text-center transition-all active-scale touch-action ${
                 activityType === type.id
-                  ? 'bg-emerald-500/20 border border-emerald-500/50'
-                  : 'bg-slate-800/50 border border-slate-700/50'
+                  ? 'bg-emerald-50 border-2 border-emerald-500 ring-2 ring-emerald-500/20'
+                  : 'bg-slate-50 border border-slate-200 hover:bg-slate-100'
               }`}
             >
               <span className="text-lg block">{type.icon}</span>
-              <span className="text-xs text-slate-400">{type.label}</span>
+              <span className={`text-xs ${activityType === type.id ? 'text-emerald-700 font-medium' : 'text-slate-600'}`}>{type.label}</span>
             </button>
           ))}
         </div>
@@ -790,7 +830,7 @@ const CopperLegalPrototype = () => {
 
       {/* Description */}
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Description</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Description</label>
         <textarea
           className="input-field"
           rows={3}
@@ -799,16 +839,16 @@ const CopperLegalPrototype = () => {
       </div>
 
       {/* Billable Toggle */}
-      <div className="flex items-center justify-between p-4 bg-slate-800/30 rounded-xl">
+      <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
         <div>
-          <div className="text-sm font-medium text-white">Billable</div>
+          <div className="text-sm font-medium text-slate-900">Billable</div>
           <div className="text-xs text-slate-500">Include in invoices</div>
         </div>
         <button
           onClick={() => setIsBillable(!isBillable)}
-          className={`w-12 h-6 rounded-full relative transition-colors ${isBillable ? 'bg-emerald-500' : 'bg-slate-600'}`}
+          className={`w-12 h-7 rounded-full relative transition-colors ${isBillable ? 'bg-emerald-500' : 'bg-slate-300'}`}
         >
-          <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${isBillable ? 'right-1' : 'left-1'}`} />
+          <div className={`absolute top-1 w-5 h-5 bg-white rounded-full shadow-md transition-all ${isBillable ? 'right-1' : 'left-1'}`} />
         </button>
       </div>
 
@@ -816,7 +856,7 @@ const CopperLegalPrototype = () => {
       <div className="flex gap-3 pt-2">
         <button
           onClick={() => setShowTimeEntry(false)}
-          className="btn-secondary flex-1 py-3 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-secondary flex-1 py-3 rounded-xl text-sm font-semibold text-slate-700 active-scale touch-action"
         >
           Cancel
         </button>
@@ -825,7 +865,7 @@ const CopperLegalPrototype = () => {
             setShowTimeEntry(false);
             showSuccessToast('Time entry saved');
           }}
-          className="btn-primary flex-1 py-3 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-primary flex-1 py-3 rounded-xl text-sm font-semibold text-white active-scale touch-action"
         >
           Save Entry
         </button>
@@ -833,7 +873,7 @@ const CopperLegalPrototype = () => {
     </div>
   );
 
-  // Documents Modal Content
+  // Documents Modal Content - Light Mode
   const DocumentsModalContent = () => (
     <div className="space-y-3">
       <div className="flex items-center gap-2 mb-4">
@@ -843,9 +883,9 @@ const CopperLegalPrototype = () => {
             placeholder="Search documents..."
             className="input-field pl-10"
           />
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">🔍</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
         </div>
-        <button className="btn-primary px-4 py-3 rounded-xl text-sm font-medium text-white active-scale touch-action">
+        <button className="btn-primary px-4 py-3 rounded-xl text-sm font-semibold text-white active-scale touch-action">
           Upload
         </button>
       </div>
@@ -853,31 +893,31 @@ const CopperLegalPrototype = () => {
       {documents.map((doc, i) => (
         <div
           key={i}
-          className="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl cursor-pointer active-scale touch-action"
+          className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl cursor-pointer hover:bg-slate-100 active-scale touch-action transition-colors"
         >
-          <div className="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-lg">
+          <div className="w-10 h-10 rounded-lg bg-red-100 flex items-center justify-center text-lg text-red-600">
             📄
           </div>
           <div className="flex-1 min-w-0">
-            <div className="font-medium text-white text-sm truncate">{doc.name}</div>
+            <div className="font-medium text-slate-900 text-sm truncate">{doc.name}</div>
             <div className="text-xs text-slate-500">{doc.date} • {doc.size}</div>
           </div>
-          <button className="text-slate-400 p-2">⋮</button>
+          <button className="text-slate-400 p-2 hover:text-slate-600 transition-colors">⋮</button>
         </div>
       ))}
     </div>
   );
 
-  // New Matter Modal Content
+  // New Matter Modal Content - Light Mode
   const NewMatterModalContent = () => (
     <div className="space-y-4">
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Matter Name</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Matter Name</label>
         <input type="text" className="input-field" placeholder="e.g., Smith v. Jones" />
       </div>
 
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Client</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Client</label>
         <select className="input-field">
           <option value="">Select a client...</option>
           {clients.map((client) => (
@@ -887,7 +927,7 @@ const CopperLegalPrototype = () => {
       </div>
 
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Practice Area</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Practice Area</label>
         <select className="input-field">
           <option value="">Select practice area...</option>
           <option>Personal Injury</option>
@@ -899,14 +939,14 @@ const CopperLegalPrototype = () => {
       </div>
 
       <div>
-        <label className="text-xs text-slate-500 uppercase tracking-wide block mb-2">Description</label>
+        <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">Description</label>
         <textarea className="input-field" rows={3} placeholder="Brief description of the matter..." />
       </div>
 
       <div className="flex gap-3 pt-2">
         <button
           onClick={() => setShowNewMatter(false)}
-          className="btn-secondary flex-1 py-3 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-secondary flex-1 py-3 rounded-xl text-sm font-semibold text-slate-700 active-scale touch-action"
         >
           Cancel
         </button>
@@ -915,7 +955,7 @@ const CopperLegalPrototype = () => {
             setShowNewMatter(false);
             showSuccessToast('Matter created');
           }}
-          className="btn-primary flex-1 py-3 rounded-xl text-sm font-medium text-white active-scale touch-action"
+          className="btn-primary flex-1 py-3 rounded-xl text-sm font-semibold text-white active-scale touch-action"
         >
           Create Matter
         </button>
@@ -947,16 +987,16 @@ const CopperLegalPrototype = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white text-white">
-      {/* Desktop Header */}
-      <header className="hidden md:block fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 z-40">
+    <div className="min-h-screen bg-white">
+      {/* Desktop Header - Light Mode */}
+      <header className="hidden md:block fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-emerald-500/20">
                 C
               </div>
-              <span className="font-semibold text-white">Copper Legal</span>
+              <span className="font-semibold text-slate-900">Copper Legal</span>
             </div>
             <nav className="flex items-center gap-1">
               {navItems.map((item) => (
@@ -969,8 +1009,8 @@ const CopperLegalPrototype = () => {
                   }}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     currentScreen === item.id && !selectedMatter && !selectedClient
-                      ? 'bg-slate-800 text-white'
-                      : 'text-slate-400 hover:text-white'
+                      ? 'bg-emerald-50 text-emerald-700'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                   }`}
                 >
                   {item.icon} {item.label}
@@ -981,36 +1021,36 @@ const CopperLegalPrototype = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setShowTimeEntry(true)}
-              className="btn-primary px-4 py-2 rounded-lg text-sm font-medium text-white"
+              className="btn-primary px-4 py-2 rounded-lg text-sm font-semibold text-white"
             >
               ⏱️ Log Time
             </button>
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-bold">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-violet-500/20">
               JD
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Header */}
-      <header className="md:hidden fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 z-40">
+      {/* Mobile Header - Light Mode */}
+      <header className="md:hidden fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-slate-200 z-40">
         <div className="px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-emerald-500/20">
               C
             </div>
-            <span className="font-semibold text-white">Copper Legal</span>
+            <span className="font-semibold text-slate-900">Copper Legal</span>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setShowTimeEntry(true)}
-              className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center"
+              className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20"
             >
               ⏱️
             </button>
             <button
               onClick={() => setShowMobileMenu(true)}
-              className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center"
+              className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 transition-colors"
             >
               ☰
             </button>
@@ -1025,8 +1065,8 @@ const CopperLegalPrototype = () => {
         </div>
       </main>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-t border-slate-800 z-40 bottom-nav">
+      {/* Mobile Bottom Navigation - Light Mode */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-200 z-40 bottom-nav">
         <div className="flex items-center justify-around h-16">
           {navItems.map((item) => (
             <button
@@ -1036,20 +1076,20 @@ const CopperLegalPrototype = () => {
                 setSelectedMatter(null);
                 setSelectedClient(null);
               }}
-              className={`flex flex-col items-center gap-1 px-4 py-2 ${
+              className={`flex flex-col items-center gap-1 px-4 py-2 transition-colors ${
                 currentScreen === item.id && !selectedMatter && !selectedClient
-                  ? 'text-emerald-400'
+                  ? 'text-emerald-600'
                   : 'text-slate-500'
               }`}
             >
               <span className="text-xl">{item.icon}</span>
-              <span className="text-xs">{item.label}</span>
+              <span className="text-xs font-medium">{item.label}</span>
             </button>
           ))}
         </div>
       </nav>
 
-      {/* Mobile Menu Sheet */}
+      {/* Mobile Menu Sheet - Light Mode */}
       <BottomSheet
         isOpen={showMobileMenu}
         onClose={() => setShowMobileMenu(false)}
@@ -1065,20 +1105,20 @@ const CopperLegalPrototype = () => {
                 setSelectedClient(null);
                 setShowMobileMenu(false);
               }}
-              className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-800/50 text-left active-scale touch-action"
+              className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-left active-scale touch-action transition-colors"
             >
               <span className="text-xl">{item.icon}</span>
-              <span className="font-medium text-white">{item.label}</span>
+              <span className="font-medium text-slate-900">{item.label}</span>
             </button>
           ))}
-          <hr className="border-slate-700 my-4" />
-          <button className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-800/50 text-left active-scale touch-action">
+          <hr className="border-slate-200 my-4" />
+          <button className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-left active-scale touch-action transition-colors">
             <span className="text-xl">⚙️</span>
-            <span className="font-medium text-white">Settings</span>
+            <span className="font-medium text-slate-900">Settings</span>
           </button>
-          <button className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-800/50 text-left active-scale touch-action">
+          <button className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-left active-scale touch-action transition-colors">
             <span className="text-xl">❓</span>
-            <span className="font-medium text-white">Help & Support</span>
+            <span className="font-medium text-slate-900">Help & Support</span>
           </button>
         </div>
       </BottomSheet>
@@ -1113,10 +1153,10 @@ const CopperLegalPrototype = () => {
       {/* Success Toast */}
       <Toast message={toastMessage} isVisible={showToast} />
 
-      {/* Prototype Label */}
-      <div className="hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 rounded-xl px-6 py-3 shadow-2xl z-50">
-        <div className="text-sm text-slate-400">
-          Copper Legal Prototype • <span className="text-emerald-400 font-medium">Mobile Responsive</span>
+      {/* Prototype Label - Light Mode */}
+      <div className="hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 bg-white border border-slate-200 rounded-xl px-6 py-3 shadow-lg z-50">
+        <div className="text-sm text-slate-600">
+          Copper Legal Prototype • <span className="text-emerald-600 font-medium">Mobile Responsive</span>
         </div>
       </div>
     </div>
