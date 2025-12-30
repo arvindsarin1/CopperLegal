@@ -1,37 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100">
   <defs>
     <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2DD4BF"/>
+      <stop offset="0%" style="stop-color:#5EEAD4"/>
       <stop offset="50%" style="stop-color:#14B8A6"/>
       <stop offset="100%" style="stop-color:#0D9488"/>
     </linearGradient>
-    <linearGradient id="iconShadow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#5EEAD4"/>
-      <stop offset="100%" style="stop-color:#14B8A6"/>
+    <linearGradient id="shineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2DD4BF;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#14B8A6;stop-opacity:0"/>
     </linearGradient>
   </defs>
 
   <!-- Icon Background -->
   <rect x="5" y="5" width="70" height="70" rx="14" fill="url(#iconGradient)"/>
 
-  <!-- Vertical highlight bar -->
-  <rect x="18" y="12" width="6" height="56" rx="3" fill="#5EEAD4" opacity="0.4"/>
+  <!-- Shine curve at bottom -->
+  <path d="M5 55 Q40 48, 75 55 L75 61 Q75 75, 61 75 L19 75 Q5 75, 5 61 Z" fill="url(#shineGradient)"/>
 
-  <!-- Wave 1 (top) -->
-  <path d="M12 22 Q25 18, 40 22 Q55 26, 68 22" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Top horizontal bar -->
+  <rect x="14" y="14" width="52" height="8" rx="2" fill="white" opacity="0.95"/>
 
-  <!-- Wave 2 (middle) -->
-  <path d="M12 40 Q25 36, 40 40 Q55 44, 68 40" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Three vertical pillars -->
+  <rect x="17" y="24" width="10" height="38" rx="2" fill="white" opacity="0.85"/>
+  <rect x="35" y="24" width="10" height="38" rx="2" fill="white" opacity="0.85"/>
+  <rect x="53" y="24" width="10" height="38" rx="2" fill="white" opacity="0.85"/>
 
-  <!-- Wave 3 (bottom) -->
-  <path d="M12 58 Q25 54, 40 58 Q55 62, 68 58" stroke="white" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Bottom horizontal bar -->
+  <rect x="14" y="58" width="52" height="8" rx="2" fill="white" opacity="0.95"/>
 
   <!-- Text: "copper" -->
-  <text x="95" y="48" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="400" fill="#334155" letter-spacing="-0.5">copper</text>
+  <text x="95" y="50" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="38" font-weight="400" fill="#374151" letter-spacing="-0.5">copper</text>
 
-  <!-- Text: "LEGAL" -->
-  <text x="232" y="48" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="600" fill="#14B8A6" letter-spacing="1">LEGAL</text>
+  <!-- Text: "Legal" -->
+  <text x="244" y="50" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="38" font-weight="400" fill="#14B8A6" letter-spacing="-0.5">Legal</text>
 
   <!-- Tagline -->
-  <text x="95" y="72" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-style="italic" fill="#94A3B8">AI-native legal practice management</text>
+  <text x="95" y="74" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-style="italic" fill="#6B7280">AI-native legal practice management</text>
 </svg>
