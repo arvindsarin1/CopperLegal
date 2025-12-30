@@ -101,12 +101,13 @@ const LoginScreen = ({ onLogin }) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Logo and Title */}
+        {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-2xl font-bold shadow-xl shadow-emerald-500/25 mb-4">
-            C
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Copper Legal</h1>
+          <img
+            src="assets/copper-legal-logo.svg"
+            alt="Copper Legal - AI-native legal practice management"
+            className="h-20 mx-auto mb-4"
+          />
           <p className="text-slate-500 mt-1">Attorney Portal</p>
         </div>
 
