@@ -74,8 +74,160 @@ const AISparkle = () => (
   </svg>
 );
 
+// Login Screen Component
+const LoginScreen = ({ onLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!email || !password) {
+      setError('Please enter your email and password');
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate authentication delay
+    setTimeout(() => {
+      // Demo credentials check (in production, this would be a real API call)
+      if (email && password) {
+        const user = {
+          name: 'Jane Doe',
+          initials: 'JD',
+          email: email,
+          role: 'Attorney'
+        };
+        onLogin(user);
+      } else {
+        setError('Invalid credentials');
+      }
+      setIsLoading(false);
+    }, 800);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Logo and Title */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white text-2xl font-bold shadow-xl shadow-emerald-500/25 mb-4">
+            C
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Copper Legal</h1>
+          <p className="text-slate-500 mt-1">Attorney Portal</p>
+        </div>
+
+        {/* Login Card */}
+        <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-xl shadow-slate-200/50">
+          <h2 className="text-xl font-semibold text-slate-900 mb-6">Sign in to your account</h2>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Error Message */}
+            {error && (
+              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* Email Input */}
+            <div>
+              <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="input-field"
+                placeholder="attorney@lawfirm.com"
+                autoComplete="email"
+              />
+            </div>
+
+            {/* Password Input */}
+            <div>
+              <label className="text-xs text-slate-500 uppercase tracking-wider font-medium block mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="input-field"
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
+
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" className="w-4 h-4 rounded border-slate-300 text-emerald-500 focus:ring-emerald-500/20" />
+                <span className="text-slate-600">Remember me</span>
+              </label>
+              <button type="button" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors">
+                Forgot password?
+              </button>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn-primary w-full py-3.5 rounded-xl text-sm font-semibold text-white active-scale touch-action disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                  Signing in...
+                </span>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-3 text-slate-400 font-medium">Or continue with</span>
+            </div>
+          </div>
+
+          {/* SSO Options */}
+          <div className="grid grid-cols-2 gap-3">
+            <button className="btn-secondary py-3 rounded-xl text-sm font-medium text-slate-700 flex items-center justify-center gap-2 active-scale touch-action">
+              <span className="text-lg">🔐</span>
+              SSO
+            </button>
+            <button className="btn-secondary py-3 rounded-xl text-sm font-medium text-slate-700 flex items-center justify-center gap-2 active-scale touch-action">
+              <span className="text-lg">📱</span>
+              Authenticator
+            </button>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-slate-400 mt-6">
+          Protected by enterprise-grade security • <span className="text-emerald-600">SOC 2 Compliant</span>
+        </p>
+      </div>
+    </div>
+  );
+};
+
 // Main Prototype Component
 const CopperLegalPrototype = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
   const [currentScreen, setCurrentScreen] = useState('matters');
   const [selectedMatter, setSelectedMatter] = useState(null);
   const [selectedClient, setSelectedClient] = useState(null);
@@ -87,6 +239,16 @@ const CopperLegalPrototype = () => {
   const [toastMessage, setToastMessage] = useState('');
   const [activityType, setActivityType] = useState('email');
   const [isBillable, setIsBillable] = useState(true);
+
+  const handleLogin = (user) => {
+    setCurrentUser(user);
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+  };
 
   const showSuccessToast = (message) => {
     setToastMessage(message);
@@ -986,6 +1148,11 @@ const CopperLegalPrototype = () => {
     }
   };
 
+  // Show login screen if not authenticated
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Desktop Header - Light Mode */}
@@ -1025,8 +1192,20 @@ const CopperLegalPrototype = () => {
             >
               ⏱️ Log Time
             </button>
-            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-violet-500/20">
-              JD
+            <div className="flex items-center gap-3">
+              <div className="text-right hidden lg:block">
+                <div className="text-sm font-medium text-slate-900">{currentUser?.name || 'Attorney'}</div>
+                <div className="text-xs text-slate-500">{currentUser?.role || 'Attorney'}</div>
+              </div>
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-violet-500/20">
+                {currentUser?.initials || 'JD'}
+              </div>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+              >
+                Sign out
+              </button>
             </div>
           </div>
         </div>
@@ -1096,6 +1275,17 @@ const CopperLegalPrototype = () => {
         title="Menu"
       >
         <div className="space-y-2">
+          {/* User Profile Section */}
+          <div className="flex items-center gap-3 p-4 mb-2 bg-gradient-to-r from-slate-50 to-emerald-50 rounded-xl border border-slate-100">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-sm font-bold text-white shadow-lg shadow-violet-500/20">
+              {currentUser?.initials || 'JD'}
+            </div>
+            <div>
+              <div className="font-medium text-slate-900">{currentUser?.name || 'Attorney'}</div>
+              <div className="text-sm text-slate-500">{currentUser?.email || 'attorney@lawfirm.com'}</div>
+            </div>
+          </div>
+
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -1119,6 +1309,16 @@ const CopperLegalPrototype = () => {
           <button className="w-full flex items-center gap-3 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 text-left active-scale touch-action transition-colors">
             <span className="text-xl">❓</span>
             <span className="font-medium text-slate-900">Help & Support</span>
+          </button>
+          <button
+            onClick={() => {
+              setShowMobileMenu(false);
+              handleLogout();
+            }}
+            className="w-full flex items-center gap-3 p-4 rounded-xl bg-red-50 hover:bg-red-100 text-left active-scale touch-action transition-colors"
+          >
+            <span className="text-xl">🚪</span>
+            <span className="font-medium text-red-700">Sign Out</span>
           </button>
         </div>
       </BottomSheet>
