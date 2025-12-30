@@ -76,38 +76,26 @@ const AISparkle = () => (
 
 // Login Screen Component
 const LoginScreen = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('attorney@lawfirm.com');
+  const [password, setPassword] = useState('password');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
-
-    if (!email || !password) {
-      setError('Please enter your email and password');
-      return;
-    }
-
     setIsLoading(true);
 
-    // Simulate authentication delay
+    // Demo login - no validation required
     setTimeout(() => {
-      // Demo credentials check (in production, this would be a real API call)
-      if (email && password) {
-        const user = {
-          name: 'Jane Doe',
-          initials: 'JD',
-          email: email,
-          role: 'Attorney'
-        };
-        onLogin(user);
-      } else {
-        setError('Invalid credentials');
-      }
+      const user = {
+        name: 'Jane Doe',
+        initials: 'JD',
+        email: email || 'attorney@lawfirm.com',
+        role: 'Attorney'
+      };
+      onLogin(user);
       setIsLoading(false);
-    }, 800);
+    }, 500);
   };
 
   return (
