@@ -76,8 +76,8 @@ const AISparkle = () => (
 
 // Login Screen Component
 const LoginScreen = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('attorney@lawfirm.com');
+  const [password, setPassword] = useState('password');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
