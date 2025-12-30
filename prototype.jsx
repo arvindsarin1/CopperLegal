@@ -947,7 +947,7 @@ const CopperLegalPrototype = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-white text-white">
       {/* Desktop Header */}
       <header className="hidden md:block fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur border-b border-slate-800 z-40">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
